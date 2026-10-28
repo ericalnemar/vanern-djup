@@ -14,9 +14,16 @@ skannade djupkarta från 1977.
 |---|---|
 | `data/vanern_djup_25m.tif` | Djupmodell, molnoptimerad GeoTIFF (COG). SWEREF 99 TM (EPSG:3006), 25 m upplösning, 4 167 × 4 656 celler. Värde = djup i meter under sjöns medelvattenyta (positivt nedåt). Land och öar = NoData. |
 | `data/vanern_djupkurvor_10m.gpkg` | Djupkurvor 10, 20 … 100 m (GeoPackage, lager `djupkurvor`, fält `djup_m`), framtagna ur djupmodellen. |
+| `qgis/vanern_djup_25m.qml` | Färdig QGIS-stil för djupmodellen (kontinuerlig färg 0–106 m). Lägg den bredvid tif-filen så används den automatiskt, eller läs in den under Lageregenskaper → Stil. |
+| `qgis/vanern_djup_fargskala.xml` | Färgskalan "Vänern djup (0–106 m)" för QGIS stilhanterare (Importera/exportera → Importera). |
+| `qgis/prov_fargskala.png` | Provbild av färgskalan. |
 | `kalla/0-0156_Vanern_SMHI_647666-129906.jpg` | Originalskanningen från SMHI (oförändrad). |
 | `skript/` | Python-skripten som gjort bearbetningen (se nedan). |
 | `skript/webbkarta/` | Skript som gör rasterrutor och 3D-terräng för en webbkarta. De använder Lantmäteriets Topografi 10, som inte ingår här. |
+
+Färgskalan går från ljust turkos vid stranden (`#e8f6fc`) till mörkt marinblått i de djupaste
+groparna (`#071a3c`), med tätare steg i grunt vatten. För en skuggad botten: lägg till tif-filen en
+gång till med renderaren Terrängskuggning och blandningsläget Multiplicera ovanpå.
 
 Bottnens höjd över havet (RH 2000) fås ungefär som Vänerns vattenstånd (cirka 44 m, varierar med
 året) minus värdet i modellen.
@@ -56,6 +63,7 @@ python skript/graticule.py kalla/0-0156_Vanern_SMHI_647666-129906.jpg arbete/gra
 python skript/classify.py kalla/0-0156_Vanern_SMHI_647666-129906.jpg arbete
 python skript/depth.py arbete 25 -175 -50
 python skript/export_release.py arbete/vanern_djup_25m.tif data
+python skript/make_ramp.py data/vanern_djup_25m.tif qgis      # kräver QGIS Python (python-qgis.bat)
 ```
 
 Pixelkoordinaterna för färgförklaring, land och ram i `classify.py` och gradnätet i `graticule.py`
@@ -81,7 +89,7 @@ Största djupet blir lite för litet eftersom de djupaste groparna är små och 
 
 ## Licens
 
-- **Data** (`data/`, `kalla/`, `oversikt.png`): [CC BY 4.0](LICENSE-data). Ange källan, till exempel:
+- **Data** (`data/`, `kalla/`, `qgis/`, `oversikt.png`): [CC BY 4.0](LICENSE-data). Ange källan, till exempel:
   *"Vänerns djup: bearbetning av SMHI:s djupkarta (Svenskt vattenarkiv, Liber Kartor 1977), CC BY 4.0."*
 - **Skript** (`skript/`): [MIT](LICENSE-skript).
 

@@ -1,0 +1,22 @@
+<!DOCTYPE qgis_style>
+<qgis_style version="2">
+  <symbols/>
+  <colorramps>
+    <colorramp name="Vänern djup (0–106 m)" tags="djup,bathymetry,vatten" type="gradient">
+      <Option type="Map">
+        <Option name="color1" type="QString" value="232,246,252,255,rgb:0.9098039,0.9647059,0.9882353,1"/>
+        <Option name="color2" type="QString" value="7,26,60,255,rgb:0.027451,0.1019608,0.2352941,1"/>
+        <Option name="direction" type="QString" value="ccw"/>
+        <Option name="discrete" type="QString" value="0"/>
+        <Option name="rampType" type="QString" value="gradient"/>
+        <Option name="spec" type="QString" value="rgb"/>
+        <Option name="stops" type="QString" value="0.0471698;203,234,255,255,rgb:0.7960784,0.9176471,1,1;rgb;ccw:0.0943396;170,218,245,255,rgb:0.6666667,0.854902,0.9607843,1;rgb;ccw:0.188679;125,195,236,255,rgb:0.4901961,0.7647059,0.9254902,1;rgb;ccw:0.283019;84,168,222,255,rgb:0.3294118,0.6588235,0.8705882,1;rgb;ccw:0.377358;52,138,204,255,rgb:0.2039216,0.5411765,0.8,1;rgb;ccw:0.471698;35,113,181,255,rgb:0.1372549,0.4431373,0.7098039,1;rgb;ccw:0.566038;26,90,156,255,rgb:0.1019608,0.3529412,0.6117647,1;rgb;ccw:0.660377;20,70,132,255,rgb:0.0784314,0.2745098,0.5176471,1;rgb;ccw:0.754717;16,54,108,255,rgb:0.0627451,0.2117647,0.4235294,1;rgb;ccw:0.849057;12,40,85,255,rgb:0.0470588,0.1568628,0.3333333,1;rgb;ccw"/>
+      </Option>
+    </colorramp>
+  </colorramps>
+  <textformats/>
+  <labelsettings/>
+  <legendpatchshapes/>
+  <symbols3d/>
+  <materialsettings/>
+</qgis_style>
