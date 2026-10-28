@@ -14,7 +14,9 @@ skannade djupkarta från 1977.
 |---|---|
 | `data/vanern_djup_25m.tif` | Djupmodell, molnoptimerad GeoTIFF (COG). SWEREF 99 TM (EPSG:3006), 25 m upplösning, 4 167 × 4 656 celler. Värde = djup i meter under sjöns medelvattenyta (positivt nedåt). Land och öar = NoData. |
 | `data/vanern_djupkurvor_10m.gpkg` | Djupkurvor 10, 20 … 100 m (GeoPackage, lager `djupkurvor`, fält `djup_m`), framtagna ur djupmodellen. |
-| `qgis/vanern_djup_25m.qml` | Färdig QGIS-stil för djupmodellen (kontinuerlig färg 0–106 m). Lägg den bredvid tif-filen så används den automatiskt, eller läs in den under Lageregenskaper → Stil. |
+| `qgis/Vänerns djup.qlr` | Färdig lagergrupp för QGIS (dra in filen i QGIS): djupkurvor, skuggad botten och djupfärg. Pekar på filerna i `data/` med relativa sökvägar. |
+| `qgis/vanern_djup_25m.qml` | QGIS-stil för djupmodellen (kontinuerlig färg 0–106 m, utjämnad läsning). Lägg den bredvid tif-filen så används den automatiskt, eller läs in den under Lageregenskaper → Stil. |
+| `qgis/vanern_djupkurvor_10m.qml` | QGIS-stil för djupkurvorna: tunna var 10:e meter, tjockare var 50:e, diskreta djuptal utan halo, referensskala 1:10 000. |
 | `qgis/vanern_djup_fargskala.xml` | Färgskalan "Vänern djup (0–106 m)" för QGIS stilhanterare (Importera/exportera → Importera). |
 | `qgis/prov_fargskala.png` | Provbild av färgskalan. |
 | `kalla/0-0156_Vanern_SMHI_647666-129906.jpg` | Originalskanningen från SMHI (oförändrad). |
@@ -22,8 +24,12 @@ skannade djupkarta från 1977.
 | `skript/webbkarta/` | Skript som gör rasterrutor och 3D-terräng för en webbkarta. De använder Lantmäteriets Topografi 10, som inte ingår här. |
 
 Färgskalan går från ljust turkos vid stranden (`#e8f6fc`) till mörkt marinblått i de djupaste
-groparna (`#071a3c`), med tätare steg i grunt vatten. För en skuggad botten: lägg till tif-filen en
-gång till med renderaren Terrängskuggning och blandningsläget Multiplicera ovanpå.
+groparna (`#071a3c`), med tätare steg i grunt vatten.
+
+I QLR:en läses rastret med kubisk utjämning när man zoomar in (annars ritar skuggningen ett rutnät
+efter 25 m-cellerna). Skuggningen använder negativ höjdfaktor eftersom djupet är positivt nedåt, och
+blandningsläget Multiplicera. Djupkurvorna jämnas ut vid ritning och djuptalen visas bara i skalor
+större än 1:60 000, på kurvor längre än 2,5 km.
 
 Bottnens höjd över havet (RH 2000) fås ungefär som Vänerns vattenstånd (cirka 44 m, varierar med
 året) minus värdet i modellen.
@@ -64,6 +70,7 @@ python skript/classify.py kalla/0-0156_Vanern_SMHI_647666-129906.jpg arbete
 python skript/depth.py arbete 25 -175 -50
 python skript/export_release.py arbete/vanern_djup_25m.tif data
 python skript/make_ramp.py data/vanern_djup_25m.tif qgis      # kräver QGIS Python (python-qgis.bat)
+python skript/make_qgis_styles.py .                            # QML-stilar och QLR, kräver QGIS Python
 ```
 
 Pixelkoordinaterna för färgförklaring, land och ram i `classify.py` och gradnätet i `graticule.py`

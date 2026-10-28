@@ -29,7 +29,7 @@
             <Option name="type" type="QString" value="collection"/>
           </Option>
         </data_defined_properties>
-        <layer class="SimpleLine" enabled="1" id="{53f13f6b-c6ea-44c9-8d1d-38f1e17aef23}" locked="0" pass="0">
+        <layer class="SimpleLine" enabled="1" id="{3c944d46-a039-4fbf-8d5b-28939d661761}" locked="0" pass="0">
           <Option type="Map">
             <Option name="align_dash_pattern" type="QString" value="0"/>
             <Option name="capstyle" type="QString" value="square"/>
@@ -41,7 +41,7 @@
             <Option name="dash_pattern_offset_unit" type="QString" value="MM"/>
             <Option name="draw_inside_polygon" type="QString" value="0"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
-            <Option name="line_color" type="QString" value="114,155,111,255,rgb:0.4470588,0.6078432,0.4352941,1"/>
+            <Option name="line_color" type="QString" value="133,182,111,255,rgb:0.5215687,0.7137255,0.4352941,1"/>
             <Option name="line_style" type="QString" value="solid"/>
             <Option name="line_width" type="QString" value="0.6"/>
             <Option name="line_width_unit" type="QString" value="MM"/>
@@ -78,10 +78,10 @@
             <Option name="type" type="QString" value="collection"/>
           </Option>
         </data_defined_properties>
-        <layer class="SimpleFill" enabled="1" id="{7cb7212e-8695-4e0b-9621-1ca25de87f97}" locked="0" pass="0">
+        <layer class="SimpleFill" enabled="1" id="{f07d8c29-8d07-4dad-9622-2749f4e5fa2b}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="114,155,111,255,rgb:0.4470588,0.6078432,0.4352941,1"/>
+            <Option name="color" type="QString" value="133,182,111,255,rgb:0.5215687,0.7137255,0.4352941,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -118,7 +118,7 @@
   </pipe-data-defined-properties>
   <pipe>
     <provider>
-      <resampling enabled="false" maxOversampling="2" zoomedInResamplingMethod="nearestNeighbour" zoomedOutResamplingMethod="nearestNeighbour"/>
+      <resampling enabled="true" maxOversampling="2" zoomedInResamplingMethod="cubicSpline" zoomedOutResamplingMethod="average"/>
     </provider>
     <rasterrenderer alphaBand="-1" band="1" classificationMax="106" classificationMin="0" nodataColor="" opacity="1" type="singlebandpseudocolor">
       <minMaxOrigin>
@@ -173,7 +173,7 @@
     <brightnesscontrast brightness="0" contrast="0" gamma="1"/>
     <huesaturation colorizeBlue="128" colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeStrength="100" grayscaleMode="0" invertColors="0" saturation="0"/>
     <rasterresampler maxOversampling="2"/>
-    <resamplingStage>resamplingFilter</resamplingStage>
+    <resamplingStage>provider</resamplingStage>
   </pipe>
   <blendMode>0</blendMode>
   <legend/>
