@@ -14,7 +14,8 @@ skannade djupkarta från 1977.
 |---|---|
 | `data/vanern_djup_25m.tif` | Djupmodell, molnoptimerad GeoTIFF (COG). SWEREF 99 TM (EPSG:3006), 25 m upplösning, 4 167 × 4 656 celler. Värde = djup i meter under sjöns medelvattenyta (positivt nedåt). Land och öar = NoData. |
 | `data/vanern_djupkurvor_10m.gpkg` | Djupkurvor 10, 20 … 100 m (GeoPackage, lager `djupkurvor`, fält `djup_m`), framtagna ur djupmodellen. |
-| `qgis/Vänerns djup.qlr` | Färdig lagergrupp för QGIS (dra in filen i QGIS): djupkurvor, skuggad botten och djupfärg. Pekar på filerna i `data/` med relativa sökvägar. |
+| `qgis/Vänerns djup (GitHub).qlr` | Samma lagergrupp, men data läses direkt från GitHub. Ladda ner bara den här filen och dra in den i QGIS. |
+| `qgis/Vänerns djup.qlr` | Färdig lagergrupp för QGIS (dra in filen i QGIS): djupkurvor, skuggad botten och djupfärg. Pekar på filerna i `data/` med relativa sökvägar, så hela förrådet behöver vara nedladdat. |
 | `qgis/vanern_djup_25m.qml` | QGIS-stil för djupmodellen (kontinuerlig färg 0–106 m, utjämnad läsning). Lägg den bredvid tif-filen så används den automatiskt, eller läs in den under Lageregenskaper → Stil. |
 | `qgis/vanern_djupkurvor_10m.qml` | QGIS-stil för djupkurvorna: tunna var 10:e meter, tjockare var 50:e, diskreta djuptal utan halo, referensskala 1:10 000. |
 | `qgis/vanern_djup_fargskala.xml` | Färgskalan "Vänern djup (0–106 m)" för QGIS stilhanterare (Importera/exportera → Importera). |
@@ -30,6 +31,19 @@ I QLR:en läses rastret med kubisk utjämning när man zoomar in (annars ritar s
 efter 25 m-cellerna). Skuggningen använder negativ höjdfaktor eftersom djupet är positivt nedåt, och
 blandningsläget Multiplicera. Djupkurvorna jämnas ut vid ritning och djuptalen visas bara i skalor
 större än 1:60 000, på kurvor längre än 2,5 km.
+
+### Läsa direkt från GitHub
+
+Djupmodellen är en molnoptimerad GeoTIFF, så QGIS kan läsa den direkt härifrån och hämtar bara de
+delar som syns. Enklast: ladda ner [`qgis/Vänerns djup (GitHub).qlr`](qgis/Vänerns%20djup%20(GitHub).qlr)
+och dra in den i QGIS. Eller lägg till rastret själv (Lägg till rasterlager → Protokoll: HTTP(S)):
+
+```
+https://raw.githubusercontent.com/ericalnemar/vanern-djup/main/data/vanern_djup_25m.tif
+```
+
+Djupkurvorna (GeoPackage) läses också från nätet, men långsammare. Ladda hellre ner dem om du
+använder dem mycket.
 
 Bottnens höjd över havet (RH 2000) fås ungefär som Vänerns vattenstånd (cirka 44 m, varierar med
 året) minus värdet i modellen.
